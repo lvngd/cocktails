@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+<style>
+    body {font-family: "Inconsolata";}
+</style>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+</head>
+
+<body>
+    <div id="cocktail-graph"></div>
+</body>
+
+<script>
+    
+function run(graph) {
+
+   var radius = 10;
+    var width = "700";
+    var height = "600";
+
+    var lineDefaultColor = "#efefef";
+    var defaultCircleFill = "#efefef";
+    var defaultCircleStroke = "#ccc";
+    var defaultTextColor = "navy";
+    var neighborLinkColor = "green";
+
+
+    var possibleFillColor = "orange";
+    var possibleStrokeColor = "orange";
+
+    var matchStrokeColor = "green";
+    var matchFillColor = "green";
+    var matchFillOpacity = "0.5";
+
+
+
+    var noMatchFillColor = "yellow";
+
+    var notConsideredFillColorStart = "white";
+    var notConsideredFillColorEnd = "#ccc";
+    var notConsideredStrokeColorEnd = "orange";
+    var notConsideredStrokeColorStart = "orange";
+
+
+    var svg = d3.select("div#cocktail-graph")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g");
+
+    var simulation = d3.forceSimulation()
+        .force("link", d3.forceLink().id(function(d) { return d.id; }))
+        .force('charge', d3.forceManyBody()
+          .strength(-150)
+        )
+        .force('collision', d3.forceCollide().radius(function(d) {
+                return d.radius;
+              }))
+        .force("center", d3.forceCenter(width / 2, height / 2));
+  
+
+    var link = svg.append("g")
+        .style("stroke", lineDefaultColor)
+        .selectAll("line")
+        .data(graph.links)
+        .enter().append("line");
+
+    var node = svg.append("g")
+        .attr("class", "nodes")
+        .selectAll("circle")
+        .data(graph.nodes)
+    
+        .enter().append("circle")
+            .attr("r", radius)
+            .style("fill", defaultCircleFill)
+            .style("stroke", defaultCircleStroke)
+            .style("stroke-width", "1px");
+
+
+    var label = svg.append("g")
+        .attr("class", "labels")
+        .selectAll("text")
+        .data(graph.nodes)
+        .enter().append("text")
+        .text(function(d) { return d.name;})
+        .attr("class", "label")
+        .style("text-anchor", "middle")
+        .style("stroke", defaultTextColor)
+        .style("font-size", '12');
+
+    simulation
+        .nodes(graph.nodes)
+        .on("tick", ticked);
+
+    simulation.force("link")
+        .links(graph.links);
+
+    function ticked() {
+        
+        node
+            .attr("cx", function(d) { return d.x = Math.max(radius, Math.min(width - (radius+30), d.x)); })
+            .attr("cy", function(d) { return d.y = Math.max(radius, Math.min(height - radius, d.y)); });
+        
+        link
+            .attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; });
+
+        label
+            .attr("x", function(d) { return d.x + 10; })
+            .attr("y", function (d) { return d.y; });
+        }
+
+    var animate = function(duration){
+
+        /* animate each circle in succession after some duration */
+        total_steps = graph.steps.length;
+        var matches = {};
+        var count = 1;
+            for(step in graph.steps){
+                if (count > 1){
+                    var previousNode = graph.steps[0];
+                    current = graph.steps[step];
+                    if (current['color'] == 'possible'){
+                        //change link colors to orange
+                        var connecting = d3.selectAll("line").filter(function(d){return(d.target.name == previousNode['node'] && d.source.name == current['node']) || (d.source.name == previousNode['node'] && d.target.name == current['node']);})
+                            .transition()
+                            .delay(count * duration)
+                            .style("stroke", "orange");
+                    }
+                    if (current['color'] == 'match'){
+                        //change link colors to green
+                        console.log(`match ${current['node']} and ${previousNode['node']}`);
+                         var connecting = d3.selectAll("line").filter(function(d){return(d.target.name == previousNode['node'] && d.source.name == current['node']) || (d.source.name == previousNode['node'] && d.target.name == current['node']);})
+                        .transition()
+                        .delay(count * duration)
+                        .style("stroke", "green");
+                    }
+                }
+                        var nodeName = graph.steps[step].node;
+                        if(matches.hasOwnProperty(nodeName)){
+                            //don't change colors again after an ingredient is found in a match
+                        }
+                        else{
+
+                            var color = graph.steps[step].color;
+                            if(color == "match"){
+                                matches[nodeName] = "match";
+                            }
+
+                            var ingredientCircle = d3.selectAll("circle")
+                                .filter(function(d){return d.name == nodeName;});
+                           var nodeId = d3.selectAll("circle")
+                                .filter(function(d){return d.name == nodeName;}).data()[0]['id'];
+
+                            switch(color){
+                                case "match":
+                                    ingredientCircle
+                                        .transition()
+                                        .delay(count * duration)
+                                        .style("fill", matchFillColor).style("stroke", matchStrokeColor).style("fill-opacity", matchFillOpacity);
+                                    break;
+                                case "possible":
+                                    ingredientCircle
+                                        .transition()
+                                        .delay(count * duration)
+                                        .style("stroke", possibleStrokeColor).style("fill", possibleFillColor);
+                                    break;
+                                case "no_match":
+                                    ingredientCircle
+                                        .transition()
+                                        .delay(count * duration)
+                                        .style("fill", "yellow");
+                                    break;
+                                case "not_considered":
+                                    ingredientCircle
+                                        .transition()
+                                        .delay(count * duration)
+                                        .style("stroke", notConsideredStrokeColorStart)
+                                        .style("fill", notConsideredFillColorStart);
+                                    ingredientCircle
+                                        .transition()
+                                        .delay(count * duration)
+                                        .style("stroke", notConsideredStrokeColorEnd)
+                                        .style("fill", notConsideredFillColorEnd);
+                                    break;                            
+                        }
+                    }
+
+                        
+                count++;
+            }   
+
+    }
+
+animate(1000);
+
+
+}
+
+d3.json('cocktails.json',function(error,data){
+      run(data)
+    });
+  
+</script>

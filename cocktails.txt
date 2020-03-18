@@ -1,0 +1,49 @@
+tequila sunrise,orange juice,tequila,grenadine
+rustaveli,chacha,vermouth,cynar,absinthe
+burrata cocktail,gin,lemon juice,gomme syrup,burrata water
+ramos gin fizz,gin,orange blossom water,egg white,half and half,lemon juice,lime juice,simple syrup,ice,seltzer
+mr. pink,rum,lime juice,campari,pineapple juice,simple syrup,egg white
+bee to the blossom,gin,lemon,honey syrup,yellow chartreuse,orange bitters
+spring fling,tequila,grapefruit juice,lime juice,orgeat,simple syrup,peychaud's bitters
+fly french 75,gin,cava,lemon juice,simple syrup
+strawberry fields,tequila,lime juice,agave syrup,strawberry,basil
+southern revival,whiskey,passionfruit puree,simple syrup,lemon juice,basil,ginger ale
+mastro's lavender collins,lavender gin,triple sec,lavender syrup,lemon juice
+ladybug,brandy,lime,orgeat,dale gegroff bitters
+easter egg hunt martini,vanilla vodka,triple sec,milk,orange juice,egg white
+what's up doc,vodka,carrot juice,lime juice,simple syrup,ginger beer
+dark and stormy,rum,ginger beer
+french 75,gin,champagne,simple syrup,lemon juice
+paloma,tequila,lime juice,grapefruit soda
+pimm's cup,pimm's no. 1,lemonade,mint,strawberry,cucumber
+sazerac,whiskey,simple syrup,peychaud's bitters,absinthe
+mimosa,champagne,orange juice
+moscow mule,vodka,ginger beer,lime juice
+pisco sour,pisco capel,simple syrup,egg white,lemon juice,angostura bitters
+gimlet,gin,simple syrup,lime juice
+cuba libre,rum,cola,lime juice
+bloody mary,sherry,vodka,tomato juice,sherry vinegar,celery salt,worcestershire sauce,tabasco sauce,lemon juice,celery,lemon
+sidecar,cognac,triple sec,lemon juice
+long island iced tea,vodka,teqila,rum,triple sec,cola,sour mix
+hurricane,dark rum,white rum,rum,orange juice,lemon juice,simple syrup,grenadine,cherry,orange
+sex on the beach,vodka,peach schnapps,oranges,cranberry juice,cherry
+mudslide,vodka,irish cream,kahlua,double cream,chocolate
+sangria,red wine,brandy,seltzer
+cosmopolitan,vodka,triple sec,lime juice,cranberry juice
+mint julep,whiskey,mint leaves,powdered sugar
+tom collins,gin,lemon juice,simple syrup,club soda,lemon
+gin fizz,gin,lemon juice,gomme syrup,seltzer
+screwdriver,vodka,orange juice
+old fashioned,whiskey,angostura bitters,sugar
+manhattan,angostura bitters,sweet vermouth,whiskey,maraschino cherry
+martini,vermouth,gin
+vodka martini,vodka,vermouth
+pina colada,rum,cream of coconut,pineapple juice
+daiquiri,rum,lime juice,simple syrup
+rum and coke,rum,cola
+gin and tonic,gin,tonic water
+whiskey sour,whiskey,lemon juice,simple syrup,orange,maraschino cherry
+white russian,vodka,half and half,kahlua
+negroni,gin,vermouth,campari
+mojito,white rum,lime juice,mint,simple syrup,seltzer
+caipirinha,cachaca,lime,sugar
