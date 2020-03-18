@@ -1,3 +1,5 @@
+Check out this [blog post](https://lvngd.com/blog/building-cocktail-recommender-python/) where you can read more about this repo.
+
 ## Cocktail Generator
 
 This is a cocktail generator class written in Python, and the idea is to generate cocktail ideas from a list of input ingredients.
